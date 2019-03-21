@@ -1,10 +1,10 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import './styles.scss';
-import EditIcon from "../../commons/buttons/EditButton";
+import EditIcon from '../../commons/buttons/EditButton';
 
 class ItemBook extends PureComponent {
   render() {
@@ -24,8 +24,8 @@ class ItemBook extends PureComponent {
             </Grid>
             <Grid item spacing={16} xs={4}>
               <span className="align">
-                <EditIcon/>
-                {/*<DelIcon/>*/}
+                <EditIcon />
+                {/* <DelIcon/> */}
               </span>
             </Grid>
           </Grid>
