@@ -1,6 +1,7 @@
 .paper {
   width: 600px;
   padding: 10px;
+  margin-bottom: 20px;
 }
 
 .card {
@@ -8,5 +9,20 @@
 }
 
 .align {
+  padding: 10px;
+}
+
+.alignButton {
+  padding: 10px;
+  text-align: right;
+}
+
+.alignEdit {
+  margin-right: 10px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
   padding: 10px;
 }

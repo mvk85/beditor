@@ -1,19 +1,24 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
-import './styles.scss';
 
 class EditButton extends PureComponent {
   render() {
+    const { classContainer } = this.props;
+
     return (
-      <Fab color="secondary" aria-label="Edit" size="small" className="align-edit">
-        <Icon>edit_icon</Icon>
-      </Fab>
+      <span className={classContainer}>
+        <Fab color="secondary" aria-label="Edit" size="small">
+          <Icon>edit_icon</Icon>
+        </Fab>
+      </span>
     );
   }
 }
 
-EditButton.propTypes = {};
+EditButton.propTypes = {
+  classContainer: PropTypes.string,
+};
 
 export default EditButton;
