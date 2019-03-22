@@ -9,7 +9,7 @@ class EditButton extends PureComponent {
 
     return (
       <span className={classContainer}>
-        <Fab color="secondary" aria-label="Edit" size="small">
+        <Fab color="primary" aria-label="Edit" size="small">
           <Icon>edit_icon</Icon>
         </Fab>
       </span>
