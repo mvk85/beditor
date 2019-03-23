@@ -1,36 +1,68 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
+import {
+  FormControl, InputLabel, FormHelperText, Input,
+} from '@material-ui/core';
 
-class Input extends PureComponent {
+class InputField extends PureComponent {
   static defaultProps = {
     value: '',
+    classContainer: '',
+  };
+
+  handleChange = (event) => {
+    const { handleChange } = this.props;
+
+    handleChange(event.target.value);
   };
 
   render() {
     const {
       value,
+      classContainer,
+      isError,
+      errorText,
+      label,
     } = this.props;
+    const htmlFor = isError ? 'component-error' : 'component-helper';
+    const id = isError ? 'component-error' : 'component-helper';
+    const idText = isError ? 'component-helper-text' : 'component-error-text';
 
     return (
-      <div>
-        <TextField
-          required
-          id="outlined-required"
-          label="Required"
-          defaultValue={value}
-          // className={classes.textField}
-          margin="normal"
-          variant="outlined"
+      <div className={classContainer}>
+        <FormControl
+          className=""
+          error={isError}
           fullWidth
-        />
+        >
+          <InputLabel htmlFor={htmlFor}>
+            {label}
+          </InputLabel>
+          <Input
+            id={id}
+            value={value}
+            onChange={this.handleChange}
+            // aria-describedby="component-error-text"
+            fullWidth
+          />
+          {isError && (
+            <FormHelperText id={idText}>
+              {errorText}
+            </FormHelperText>
+          )}
+        </FormControl>
       </div>
     );
   }
 }
 
-Input.propTypes = {
+InputField.propTypes = {
   value: PropTypes.string,
+  handleChange: PropTypes.func,
+  classContainer: PropTypes.string,
+  isError: PropTypes.bool,
+  label: PropTypes.string,
+  errorText: PropTypes.string,
 };
 
-export default Input;
+export default InputField;

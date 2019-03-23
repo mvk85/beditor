@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import ListBooks from '../ListBooks';
 import FormBook from '../FormBook';
+import styles from './styles.scss';
 
 class RootRouter extends Component {
   render() {
     return (
-      <Switch>
-        <Route path="/" exact component={ListBooks} />
-        <Route path="/book" component={FormBook} />
-      </Switch>
+      <div className={styles.container}>
+        <Switch>
+          <Route path="/" exact component={ListBooks} />
+          <Route path="/book" component={FormBook} />
+        </Switch>
+      </div>
     );
   }
 }
