@@ -42,8 +42,6 @@ Input.propTypes = {
   label: PropTypes.string,
   disabled: PropTypes.bool,
   classContainer: PropTypes.string,
-  errorText: PropTypes.string,
-  name: PropTypes.string,
 };
 
 export default Input;
