@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from "react-router";
+import { Field } from 'redux-form';
 
 
 class FormBook extends PureComponent {

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import ListBooks from '../ListBooks';
-import FormBook from '../FormBook/FormBook';
+import FormBook from '../FormBook';
 
 class RootRouter extends Component {
   render() {
@@ -14,7 +13,5 @@ class RootRouter extends Component {
     );
   }
 }
-
-RootRouter.propTypes = {};
 
 export default RootRouter;

@@ -9,7 +9,6 @@ class AddBook extends PureComponent {
     const { history } = this.props;
 
     history.push('/book');
-    console.log('add');
   };
 
   render() {
@@ -22,8 +21,6 @@ class AddBook extends PureComponent {
 }
 
 AddBook.propTypes = {
-  // match: PropTypes.object.isRequired,
-  // location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 };
 

@@ -12,7 +12,7 @@ class ItemBook extends PureComponent {
     return (
       <div className={styles.card}>
         <Paper className={styles.paper}>
-          <Grid container >
+          <Grid container>
             <Grid item xs={8}>
               <div className={styles.title}>
                 message
