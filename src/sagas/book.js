@@ -1,14 +1,17 @@
 import {
   takeLatest, put, call, fork,
 } from 'redux-saga/effects';
-import {deleteBook, getBooks, saveBook} from '../api/localStorage';
-import {deleteBookAction, fetchBooks, saveNewBook, setBooks} from '../actions/book';
+import { deleteBook, getBooks, saveBook } from '../api/localStorage';
+import {
+  deleteBookAction, fetchBooks, saveNewBook, setBooks,
+} from '../actions/book';
 
 function* saveBookWorker(action) {
   try {
-    yield call(saveBook, action.payload);
+    const { book, cb } = action.payload;
+    yield call(saveBook, book);
 
-    // console.log('saveBookWorker action = ', action);
+    if (cb) { cb(); }
   } catch (error) {
     console.error('saveBookWorker error: ', error);
     // error view?

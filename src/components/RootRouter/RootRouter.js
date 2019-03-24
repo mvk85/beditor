@@ -10,6 +10,7 @@ class RootRouter extends Component {
       <div className={styles.container}>
         <Switch>
           <Route path="/" exact component={ListBooks} />
+          <Route path="/book/:id" component={FormBook} />
           <Route path="/book" component={FormBook} />
         </Switch>
       </div>
