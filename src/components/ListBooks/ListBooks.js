@@ -5,16 +5,37 @@ import styles from './styles.scss';
 import AddBook from './AddBook/AddBook';
 
 class ListBooks extends Component {
+  componentDidMount() {
+    const { fetchBooks } = this.props;
+
+    fetchBooks();
+  }
+
   render() {
+    const {
+      data,
+      deleteBookAction,
+    } = this.props;
+
     return (
       <div className={styles.container}>
         <AddBook />
-        <ItemBook />
+        {Object.keys(data).map(key => (
+          <ItemBook
+            key={data[key].id}
+            item={data[key]}
+            deleteBook={deleteBookAction}
+          />
+        ))}
       </div>
     );
   }
 }
 
-ListBooks.propTypes = {};
+ListBooks.propTypes = {
+  fetchBooks: PropTypes.func,
+  data: PropTypes.object,
+  deleteBookAction: PropTypes.func,
+};
 
 export default ListBooks;

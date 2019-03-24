@@ -12,8 +12,6 @@ class FormBook extends React.Component {
       invalid,
     } = this.props;
 
-    console.log('form props = ', this.props);
-
     return (
       <div className={styles.container}>
         <form onSubmit={handleSubmit}>
