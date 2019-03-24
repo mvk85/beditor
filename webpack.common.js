@@ -1,16 +1,15 @@
-const webpack = require('webpack');
+/* eslint-disable import/no-extraneous-dependencies */
+// const webpack = require('webpack');
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-// Константы для путей
 const root = path.join(__dirname); // path = */app
 const pathApp = path.join(root, 'src/index.js');
 const pathJsSource = path.join(root, 'src');
 const pathNodeModules = path.join(root, 'node_modules');
 
-// Конфиги для правил сборки
 const fileConfig = {
   test: /\.(ttf|eot|woff|woff2|svg)$/,
   exclude: /src/,
@@ -29,7 +28,6 @@ const svgConfig = {
   },
 };
 
-// Общий конфиг для dev and prod режимов сборки
 const config = {
   entry: {
     app: pathApp,
@@ -52,7 +50,6 @@ const config = {
   },
 
   plugins: [
-    // удаляет папку dist каждый раз при сборке
     new CleanWebpackPlugin({
       verbose: true,
       dry: false,
@@ -64,11 +61,9 @@ const config = {
       filename: './index.html',
     }),
 
-    // копирует все файлы из указанного адреса в /dist или в hmr сборку
-    // можно добавлять необходимые пути в массив
-    new CopyWebpackPlugin([
-      'src/static',
-    ]),
+    // new CopyWebpackPlugin([
+    //   'src/static',
+    // ]),
   ],
 };
 

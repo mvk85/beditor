@@ -29,6 +29,7 @@
   },
   "plugins": ["jest"],
   "env": {
-    "jest": true
+    "jest": true,
+    "node" : true
   }
 }

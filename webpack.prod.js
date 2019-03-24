@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -5,11 +6,9 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const common = require('./webpack.common.js');
 
-// Константы для путей
 const root = path.join(__dirname); // path = */app
 const pathContentBase = path.join(root, 'dist');
 
-// Конфиги для правил сборки
 const cssConfig = {
   test: /\.(scss|css)$/,
   include: [
@@ -52,7 +51,6 @@ const imgConfig = {
   ],
 };
 
-// Конфиг только для прод режима (distribution)
 const configProd = {
   mode: 'production',
   devtool: false, // 'source-map',
@@ -72,7 +70,6 @@ const configProd = {
 
   optimization: {
     minimizer: [
-      // аглификация и минификация js бандла
       new UglifyJSPlugin({
         cache: true,
         parallel: true,
@@ -83,7 +80,6 @@ const configProd = {
   },
 
   plugins: [
-    // минификация css бандла
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
       chunkFilename: '[id].[hash].css',

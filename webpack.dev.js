@@ -3,11 +3,9 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
-// Константы для путей
 const root = path.join(__dirname); // path = */app
 const pathContentBase = path.join(root, 'dist');
 
-// Конфиги для правил сборки
 const cssConfig = {
   test: /\.(scss|css)$/,
   include: [
@@ -36,7 +34,6 @@ const cssModulesConfig = {
         localIdentName: '[folder]__[local]__[hash:base64:8]',
       },
     },
-    // { loader: 'postcss-loader' },
     { loader: 'sass-loader' },
   ],
 };
@@ -55,7 +52,6 @@ const imgConfig = {
   ],
 };
 
-// Конфиг только для дев режима (локальная работа)
 const configDev = {
   mode: 'development',
   watch: true,
@@ -72,7 +68,6 @@ const configDev = {
     ],
   },
   plugins: [
-    // activates HMR
     new webpack.HotModuleReplacementPlugin(),
 
     // prints more readable module names in the browser console on HMR updates

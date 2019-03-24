@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import InputField from '../../commons/fields/Input/Input';
 
@@ -17,8 +17,7 @@ class Input extends React.Component {
       disabled,
       classContainer,
     } = this.props;
-
-    console.log('F props = ', this.props);
+    const errorText = (touched && error) || '';
 
     return (
       <div>
@@ -29,7 +28,7 @@ class Input extends React.Component {
           disabled={disabled}
           label={label}
           isError={touched && invalid}
-          errorText={touched && error}
+          errorText={errorText}
         />
       </div>
     );
