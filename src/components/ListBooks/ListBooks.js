@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ItemBook from './ItemBook';
 import styles from './styles.scss';
 import AddBook from './AddBook/AddBook';
+import FilterList from './SortList';
 
 class ListBooks extends Component {
   componentDidMount() {
@@ -20,6 +21,7 @@ class ListBooks extends Component {
     return (
       <div className={styles.container}>
         <AddBook />
+        <FilterList />
         {Object.keys(data).map(key => (
           <ItemBook
             key={data[key].id}

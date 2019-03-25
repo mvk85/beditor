@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { combineReducers } from 'redux';
-import { deleteBookAction, setBooks } from '../actions/book';
+import { deleteBookAction, setBooks, setSortBookList } from '../actions/book';
 
 const data = handleActions({
   [setBooks]: (state, action) => action.payload,
@@ -14,8 +14,14 @@ const data = handleActions({
   },
 }, {});
 
+const sort = handleActions({
+  [setSortBookList]: (state, action) => action.payload,
+}, {});
+
 export default combineReducers({
   data,
+  sort,
 });
 
 export const getListBook = state => state.books.data;
+export const getSortListBook = state => state.books.sort;

@@ -1,9 +1,11 @@
 import {
   takeLatest, put, call, fork,
 } from 'redux-saga/effects';
-import { deleteBook, getBooks, saveBook } from '../api/localStorage';
 import {
-  deleteBookAction, fetchBooks, saveNewBook, setBooks,
+  deleteBook, getBooks, getSortBooks, saveBook, setSortBooks,
+} from '../api/localStorage';
+import {
+  deleteBookAction, fetchBooks, getSortBookList, saveNewBook, sendSortBookList, setBooks, setSortBookList,
 } from '../actions/book';
 
 function* saveBookWorker(action) {
@@ -43,8 +45,6 @@ function* deleteBookWorker(action) {
   try {
     yield call(deleteBook, action.payload.id);
     yield put(fetchBooks());
-
-    // yield put(deleteBookAction(action.payload));
   } catch (error) {
     console.error('deleteBookWorker error: ', error);
     // error view?
@@ -55,8 +55,38 @@ export function* deleteBookWatcher() {
   yield takeLatest(deleteBookAction, deleteBookWorker);
 }
 
+function* sortBooksWorker() {
+  try {
+    const sort = yield call(getSortBooks);
+    yield put(setSortBookList(sort));
+  } catch (error) {
+    console.error('deleteBookWorker error: ', error);
+    // error view?
+  }
+}
+
+export function* sortBooksWatcher() {
+  yield takeLatest(getSortBookList, sortBooksWorker);
+}
+
+function* sendSortBooksWorker(action) {
+  try {
+    yield call(setSortBooks, action.payload);
+    yield put(setSortBookList(action.payload));
+  } catch (error) {
+    console.error('sendSortBooksWorker error: ', error);
+    // error view?
+  }
+}
+
+export function* sendSortBooksWatcher() {
+  yield takeLatest(sendSortBookList, sendSortBooksWorker);
+}
+
 export default [
   fork(saveBookWatcher),
   fork(getBooksWatcher),
   fork(deleteBookWatcher),
+  fork(sortBooksWatcher),
+  fork(sendSortBooksWatcher),
 ];
