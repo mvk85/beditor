@@ -11,12 +11,16 @@ class FormBook extends React.Component {
     const {
       handleSubmit,
       invalid,
+      isEdit,
     } = this.props;
+    const title = isEdit ? 'Редактировать книгу' : 'Добавить книгу';
 
     return (
       <div className={styles.container}>
         <form onSubmit={handleSubmit}>
-          <div className={styles.title}>Добавить Книгу</div>
+          <div className={styles.title}>
+            {title}
+          </div>
           <Field
             name={BOOK_TITLE_FIELD}
             component={Input}
@@ -38,6 +42,7 @@ class FormBook extends React.Component {
 FormBook.propTypes = {
   handleSubmit: PropTypes.func,
   invalid: PropTypes.bool,
+  isEdit: PropTypes.bool,
 };
 
 export default FormBook;

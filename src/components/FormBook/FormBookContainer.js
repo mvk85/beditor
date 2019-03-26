@@ -52,6 +52,7 @@ export default compose(
         onSubmit: handleSubmit,
 
         initialValues,
+        isEdit: Boolean(idEditBook),
       };
     },
   ),

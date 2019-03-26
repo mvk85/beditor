@@ -1,18 +1,23 @@
 import { isEmpty } from '../../utils/data';
-
-export const REQUIRED_FIELD_TEXT = 'поле обязательно для заполнения';
-
-const getErrorEmptyObj = () => ({
-  isError: false,
-  text: '',
-});
+import {
+  getErrorEmptyObj, moreThen, moreThenTextError, requiredTextError,
+} from '../../utils/validate';
 
 const validateTitle = (value) => {
   const error = getErrorEmptyObj();
 
   if (isEmpty(value)) {
     error.isError = true;
-    error.text = REQUIRED_FIELD_TEXT;
+    error.text = requiredTextError();
+
+    return error;
+  }
+
+  if (moreThen(value, 30)) {
+    error.isError = true;
+    error.text = moreThenTextError(30);
+
+    return error;
   }
 
   return error;

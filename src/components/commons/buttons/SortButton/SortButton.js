@@ -13,7 +13,7 @@ class SortButton extends PureComponent {
       isUp,
       active,
     } = this.props;
-    const color = active ? 'primary' : '';
+    const color = active ? 'primary' : 'default';
 
     return (
       <span className={classContainer}>

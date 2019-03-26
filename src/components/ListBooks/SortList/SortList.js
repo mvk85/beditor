@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import styles from './styles.scss';
 import SortButton from '../../commons/buttons/SortButton/SortButton';
 import { isEmpty } from '../../../utils/data';
+import { setActiveItemSort, setDeactivateItemSort, setRevertDownUpSort } from './helper';
 
 class SortList extends PureComponent {
   componentDidMount() {
@@ -18,12 +19,12 @@ class SortList extends PureComponent {
 
     if (!title.active) {
       newSort = {
-        title: { ...title, active: true },
-        year: { ...year, active: false },
+        title: setActiveItemSort(title),
+        year: setDeactivateItemSort(year),
       };
     } else {
       newSort = {
-        title: { ...title, isDown: !title.isDown, isUp: !title.isUp },
+        title: setRevertDownUpSort(title),
         year: { ...year },
       };
     }
@@ -37,13 +38,13 @@ class SortList extends PureComponent {
 
     if (!year.active) {
       newSort = {
-        title: { ...title, active: false },
-        year: { ...year, active: true },
+        title: setDeactivateItemSort(title),
+        year: setActiveItemSort(year),
       };
     } else {
       newSort = {
         title: { ...title },
-        year: { ...year, isDown: !year.isDown, isUp: !year.isUp },
+        year: setRevertDownUpSort(year),
       };
     }
 
@@ -63,8 +64,6 @@ class SortList extends PureComponent {
         </div>
       );
     }
-
-    console.log('sort = ', sort);
 
     return (
       <div className={styles.card}>
