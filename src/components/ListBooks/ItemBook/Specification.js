@@ -26,7 +26,7 @@ class Specification extends PureComponent {
 
 Specification.propTypes = {
   caption: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 };
 
 export default Specification;

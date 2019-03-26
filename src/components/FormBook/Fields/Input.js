@@ -16,6 +16,7 @@ class Input extends React.Component {
       label,
       disabled,
       classContainer,
+      type,
     } = this.props;
     const errorText = (touched && error) || '';
 
@@ -29,6 +30,7 @@ class Input extends React.Component {
           label={label}
           isError={touched && invalid}
           errorText={errorText}
+          type={type}
         />
       </div>
     );
@@ -41,6 +43,7 @@ Input.propTypes = {
   label: PropTypes.string,
   disabled: PropTypes.bool,
   classContainer: PropTypes.string,
+  type: PropTypes.string,
 };
 
 export default Input;

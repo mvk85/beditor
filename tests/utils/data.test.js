@@ -1,4 +1,4 @@
-import { isEmpty } from '../../src/utils/data';
+import { isEmpty, sortByKeyBook } from '../../src/utils/data';
 
 describe('test data utils', () => {
   describe('isEmpty test', () => {
@@ -26,6 +26,30 @@ describe('test data utils', () => {
     });
     test('object not empty', () => {
       expect(isEmpty(valueNotEmptyObject)).not.toBeTruthy();
+    });
+  });
+
+  describe('sortByKeyBook sort list books', () => {
+    const dataRaw = [
+      { data: { title: 'title1' } },
+      { data: { title: 'title3' } },
+    ];
+    const dataSortAsc = [
+      { data: { title: 'title1' } },
+      { data: { title: 'title3' } },
+    ];
+    const dataSortDesc = [
+      { data: { title: 'title3' } },
+      { data: { title: 'title1' } },
+    ];
+    const ASC = true;
+    const DESC = false;
+
+    test('asc sort by title', () => {
+      expect(dataRaw.sort(sortByKeyBook('title', ASC))).toEqual(dataSortAsc);
+    });
+    test('desc sort by title', () => {
+      expect(dataRaw.sort(sortByKeyBook('title', DESC))).toEqual(dataSortDesc);
     });
   });
 });

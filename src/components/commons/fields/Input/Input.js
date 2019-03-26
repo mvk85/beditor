@@ -23,6 +23,7 @@ class InputField extends PureComponent {
       isError,
       errorText,
       label,
+      type,
     } = this.props;
     const htmlFor = isError ? 'component-error' : 'component-helper';
     const id = isError ? 'component-error' : 'component-helper';
@@ -42,8 +43,8 @@ class InputField extends PureComponent {
             id={id}
             value={value}
             onChange={this.handleChange}
-            // aria-describedby="component-error-text"
             fullWidth
+            type={type}
           />
           {isError && (
             <FormHelperText id={idText}>
@@ -63,6 +64,7 @@ InputField.propTypes = {
   isError: PropTypes.bool,
   label: PropTypes.string,
   errorText: PropTypes.string,
+  type: PropTypes.string,
 };
 
 export default InputField;
