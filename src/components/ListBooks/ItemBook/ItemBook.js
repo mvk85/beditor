@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import styles from './styles.scss';
 import Specification from './Specification';
 import ChangeBook from './ChangeBook';
-import { BOOK_TITLE_CAPTION_FIELD, BOOK_YEAR_CAPTION_FIELD } from '../../../consts/book';
+import { BOOK_ISBN_CAPTION_FIELD, BOOK_TITLE_CAPTION_FIELD, BOOK_YEAR_CAPTION_FIELD } from '../../../consts/book';
 
 class ItemBook extends PureComponent {
   render() {
@@ -16,6 +16,7 @@ class ItemBook extends PureComponent {
     const {
       title,
       year,
+      isbn,
     } = data;
 
     return (
@@ -33,6 +34,10 @@ class ItemBook extends PureComponent {
           <Specification
             caption={BOOK_YEAR_CAPTION_FIELD}
             text={year}
+          />
+          <Specification
+            caption={BOOK_ISBN_CAPTION_FIELD}
+            text={isbn}
           />
           {/* <Specification caption="список авторов" text="Автор 1, автор 2" />
           <Specification caption="количество страниц" text="500" />

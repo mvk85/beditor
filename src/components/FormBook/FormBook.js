@@ -6,6 +6,8 @@ import styles from './styles.scss';
 import Input from './Fields/Input';
 import SaveButton from '../commons/buttons/SaveButton/SaveButton';
 import {
+  BOOK_ISBN_CAPTION_FIELD,
+  BOOK_ISBN_FIELD,
   BOOK_TITLE_CAPTION_FIELD, BOOK_TITLE_FIELD, BOOK_YEAR_CAPTION_FIELD, BOOK_YEAR_FIELD,
 } from '../../consts/book';
 
@@ -48,6 +50,13 @@ class FormBook extends React.Component {
             label={BOOK_YEAR_CAPTION_FIELD}
             classContainer={styles.field}
           />
+          <Field
+            name={BOOK_ISBN_FIELD}
+            component={Input}
+            type="text"
+            label={BOOK_ISBN_CAPTION_FIELD}
+            classContainer={styles.field}
+          />
         </form>
         <SaveButton
           handleClick={handleSubmit}
@@ -60,7 +69,6 @@ class FormBook extends React.Component {
 
 FormBook.propTypes = {
   handleSubmit: PropTypes.func,
-  invalid: PropTypes.bool,
   isEdit: PropTypes.bool,
 };
 
