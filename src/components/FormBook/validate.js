@@ -1,8 +1,8 @@
 import { isEmpty } from '../../utils/data';
 import {
-  getErrorEmptyObj, moreThen, moreThenTextError, requiredTextError,
+  getErrorEmptyObj, lessThen, moreThen, moreThenTextError, requiredTextError,
 } from '../../utils/validate';
-import { ISBN_NOT_CORRECT_FIELD_TEXT, YEAR_NOT_EARLIER_FIELD_TEXT } from '../../consts/errors';
+import { COUNT_FIELD_TEXT_ERROR, ISBN_NOT_CORRECT_FIELD_TEXT, YEAR_NOT_EARLIER_FIELD_TEXT } from '../../consts/errors';
 
 const validateTitle = (value) => {
   const error = getErrorEmptyObj();
@@ -27,7 +27,7 @@ const validateTitle = (value) => {
 const validateYear = (value) => {
   const error = getErrorEmptyObj();
 
-  if (Number(value) < 1800) {
+  if (lessThen(Number(value), 1800)) {
     error.isError = true;
     error.text = YEAR_NOT_EARLIER_FIELD_TEXT;
 
@@ -113,6 +113,26 @@ const validateISBN = (value) => {
   return error;
 };
 
+const validateCount = (value) => {
+  const error = getErrorEmptyObj();
+
+  if (isEmpty(value)) {
+    error.isError = true;
+    error.text = requiredTextError();
+
+    return error;
+  }
+
+  if (lessThen(Number(value), 0) || moreThen(Number(value), 10000)) {
+    error.isError = true;
+    error.text = COUNT_FIELD_TEXT_ERROR;
+
+    return error;
+  }
+
+  return error;
+};
+
 /**
  * Common form validator
  * @param values
@@ -123,10 +143,12 @@ export const validateFormBook = (values) => {
     title,
     year,
     isbn,
+    count,
   } = values;
   const vTitle = validateTitle(title);
   const vYear = validateYear(year);
   const vISBN = validateISBN(isbn);
+  const vCount = validateCount(count);
 
   if (vTitle.isError) {
     errors.title = vTitle.text;
@@ -138,6 +160,10 @@ export const validateFormBook = (values) => {
 
   if (vISBN.isError) {
     errors.isbn = vISBN.text;
+  }
+
+  if (vCount.isError) {
+    errors.count = vCount.text;
   }
 
   return errors;
