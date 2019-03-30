@@ -1,0 +1,2 @@
+export const DATE_PICKER_FORMAT = 'YYYY-MM-DD';
+export const DATE_PICKER_BOOK_FORMAT = 'DD.MM.YYYY';

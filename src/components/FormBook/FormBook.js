@@ -7,7 +7,7 @@ import Input from './Fields/Input';
 import SaveButton from '../commons/buttons/SaveButton/SaveButton';
 import {
   BOOK_COUNT_CAPTION_FIELD,
-  BOOK_COUNT_FIELD,
+  BOOK_COUNT_FIELD, BOOK_DATE_CAPTION_FIELD, BOOK_DATE_FIELD,
   BOOK_ISBN_CAPTION_FIELD,
   BOOK_ISBN_FIELD,
   BOOK_TITLE_CAPTION_FIELD, BOOK_TITLE_FIELD, BOOK_YEAR_CAPTION_FIELD, BOOK_YEAR_FIELD,
@@ -64,6 +64,13 @@ class FormBook extends React.Component {
             component={Input}
             type="text"
             label={BOOK_ISBN_CAPTION_FIELD}
+            classContainer={styles.field}
+          />
+          <Field
+            name={BOOK_DATE_FIELD}
+            component={Input}
+            type="date"
+            label={BOOK_DATE_CAPTION_FIELD}
             classContainer={styles.field}
           />
         </form>

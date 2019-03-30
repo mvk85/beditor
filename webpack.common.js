@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-// const webpack = require('webpack');
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -60,6 +60,11 @@ const config = {
       template: './src/index.html',
       filename: './index.html',
     }),
+
+    new webpack.ContextReplacementPlugin(
+      /moment[/\\]locale$/,
+      /en|ru/,
+    ),
 
     // new CopyWebpackPlugin([
     //   'src/static',

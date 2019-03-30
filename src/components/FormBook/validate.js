@@ -1,8 +1,15 @@
+import moment from 'moment';
 import { isEmpty } from '../../utils/data';
 import {
   getErrorEmptyObj, lessThen, moreThen, moreThenTextError, requiredTextError,
 } from '../../utils/validate';
-import { COUNT_FIELD_TEXT_ERROR, ISBN_NOT_CORRECT_FIELD_TEXT, YEAR_NOT_EARLIER_FIELD_TEXT } from '../../consts/errors';
+import {
+  COUNT_FIELD_TEXT_ERROR,
+  DATE_FIELD_TEXT_ERROR,
+  ISBN_NOT_CORRECT_FIELD_TEXT,
+  YEAR_NOT_EARLIER_FIELD_TEXT,
+} from '../../consts/errors';
+import { DATE_PICKER_FORMAT } from '../../consts/date';
 
 const validateTitle = (value) => {
   const error = getErrorEmptyObj();
@@ -133,6 +140,22 @@ const validateCount = (value) => {
   return error;
 };
 
+const validateDate = (value) => { // value = 2019-03-22
+  const error = getErrorEmptyObj();
+
+  const selectDate = moment(value, DATE_PICKER_FORMAT);
+  const minDate = moment('1800-01-01', DATE_PICKER_FORMAT);
+
+  if (selectDate < minDate) {
+    error.isError = true;
+    error.text = DATE_FIELD_TEXT_ERROR;
+
+    return error;
+  }
+
+  return error;
+};
+
 /**
  * Common form validator
  * @param values
@@ -144,11 +167,13 @@ export const validateFormBook = (values) => {
     year,
     isbn,
     count,
+    date,
   } = values;
   const vTitle = validateTitle(title);
   const vYear = validateYear(year);
   const vISBN = validateISBN(isbn);
   const vCount = validateCount(count);
+  const vDate = validateDate(date);
 
   if (vTitle.isError) {
     errors.title = vTitle.text;
@@ -164,6 +189,10 @@ export const validateFormBook = (values) => {
 
   if (vCount.isError) {
     errors.count = vCount.text;
+  }
+
+  if (vDate.isError) {
+    errors.date = vDate.text;
   }
 
   return errors;
