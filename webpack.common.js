@@ -39,6 +39,7 @@ const config = {
       pathNodeModules,
       pathJsSource,
     ],
+    mainFields: ['browser', 'module', 'main'],
   },
 
   module: {

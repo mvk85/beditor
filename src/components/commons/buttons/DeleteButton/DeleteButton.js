@@ -4,28 +4,29 @@ import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 class DeleteButton extends PureComponent {
-  handleClick = () => {
-    const { idBook, handleClick } = this.props;
-
-    handleClick({ id: idBook });
-  };
-
   render() {
+    const {
+      handleClick,
+      classContainer,
+    } = this.props;
+
     return (
-      <Fab
-        aria-label="Delete"
-        size="small"
-        onClick={this.handleClick}
-      >
-        <DeleteIcon />
-      </Fab>
+      <span className={classContainer}>
+        <Fab
+          aria-label="Delete"
+          size="small"
+          onClick={handleClick}
+        >
+          <DeleteIcon />
+        </Fab>
+      </span>
     );
   }
 }
 
 DeleteButton.propTypes = {
   handleClick: PropTypes.func,
-  idBook: PropTypes.string,
+  classContainer: PropTypes.string,
 };
 
 export default DeleteButton;

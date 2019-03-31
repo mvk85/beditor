@@ -13,11 +13,16 @@ class ChangeBook extends PureComponent {
     history.push('/book/' + idBook);
   };
 
+  handleDelete = () => {
+    const { idBook, deleteBook } = this.props;
+
+    deleteBook({ id: idBook });
+  };
+
   render() {
     const {
       title,
       idBook,
-      deleteBook,
     } = this.props;
 
     return (
@@ -35,8 +40,7 @@ class ChangeBook extends PureComponent {
               handleClick={this.handleEdit}
             />
             <DeleteButton
-              idBook={idBook}
-              handleClick={deleteBook}
+              handleClick={this.handleDelete}
             />
           </div>
         </Grid>
