@@ -6,7 +6,7 @@ import Specification from './Specification';
 import ChangeBook from './ChangeBook';
 import {
   BOOK_COUNT_CAPTION_FIELD, BOOK_DATE_CAPTION_FIELD, BOOK_FILE_CAPTION_FIELD,
-  BOOK_ISBN_CAPTION_FIELD, BOOK_PUBLISHING_CAPTION_FIELD,
+  BOOK_ISBN_CAPTION_FIELD, BOOK_LIST_AUTHORS_CAPTION_FIELD, BOOK_PUBLISHING_CAPTION_FIELD,
   BOOK_TITLE_CAPTION_FIELD,
   BOOK_YEAR_CAPTION_FIELD,
 } from '../../../consts/book';
@@ -14,6 +14,25 @@ import { getFormatDateForBook } from '../../../utils/date';
 import ViewImage from './ViewImage';
 
 class ItemBook extends PureComponent {
+  prepareAuthors = () => {
+    const { item: { data: { authors } } } = this.props;
+    let result = '';
+
+    if (!authors) {
+      return result;
+    }
+
+    authors.forEach((author) => {
+      if (!result) {
+        result = `${author.name} ${author.surname}`;
+      } else {
+        result = `${result}, ${author.name} ${author.surname}`;
+      }
+    });
+
+    return result;
+  };
+
   render() {
     const {
       item: { data, id },
@@ -30,6 +49,7 @@ class ItemBook extends PureComponent {
       publishing,
     } = data;
     const dateFormat = date && getFormatDateForBook(date);
+    const authorsFormatting = this.prepareAuthors();
 
     return (
       <div className={styles.card}>
@@ -41,6 +61,10 @@ class ItemBook extends PureComponent {
           />
           <Specification
             caption={BOOK_TITLE_CAPTION_FIELD}
+            text={authorsFormatting}
+          />
+          <Specification
+            caption={BOOK_LIST_AUTHORS_CAPTION_FIELD}
             text={title}
           />
           <Specification
