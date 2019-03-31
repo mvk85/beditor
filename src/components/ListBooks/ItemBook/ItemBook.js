@@ -61,11 +61,11 @@ class ItemBook extends PureComponent {
           />
           <Specification
             caption={BOOK_TITLE_CAPTION_FIELD}
-            text={authorsFormatting}
+            text={title}
           />
           <Specification
             caption={BOOK_LIST_AUTHORS_CAPTION_FIELD}
-            text={title}
+            text={authorsFormatting}
           />
           <Specification
             caption={BOOK_COUNT_CAPTION_FIELD}

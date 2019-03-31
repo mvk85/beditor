@@ -6,7 +6,7 @@ import {
 import {
   COUNT_FIELD_TEXT_ERROR,
   DATE_FIELD_TEXT_ERROR,
-  ISBN_NOT_CORRECT_FIELD_TEXT,
+  ISBN_NOT_CORRECT_FIELD_TEXT, ONE_AUTHOR_FIELD_TEXT_ERROR,
   YEAR_NOT_EARLIER_FIELD_TEXT,
 } from '../../consts/errors';
 import { DATE_PICKER_FORMAT } from '../../consts/date';
@@ -169,6 +169,46 @@ const validatePublishing = (value) => {
   return error;
 };
 
+const validateAuthors = (value) => {
+  const error = getErrorEmptyObj();
+  const firstAuthor = value && value[0];
+
+  if (!firstAuthor || !(firstAuthor.name && firstAuthor.surname)) {
+    error.isError = true;
+    error.error = { errorRequired: ONE_AUTHOR_FIELD_TEXT_ERROR };
+
+    return error;
+  }
+
+  const dataError = [];
+
+  value.forEach((author) => {
+    const { name, surname, id } = author;
+    const errorObj = { id, name: '', surname: '' };
+
+    if (moreThen(name, 20)) {
+      errorObj.name = moreThenTextError(20);
+    }
+
+    if (moreThen(surname, 20)) {
+      errorObj.surname = moreThenTextError(20);
+    }
+
+    if (errorObj.surname || errorObj.name) {
+      dataError.push(errorObj);
+    }
+  });
+
+  if (!isEmpty(dataError)) {
+    error.isError = true;
+    error.error = { data: dataError };
+
+    return error;
+  }
+
+  return error;
+};
+
 /**
  * Common form validator
  * @param values
@@ -182,6 +222,7 @@ export const validateFormBook = (values) => {
     count,
     date,
     publishing,
+    authors,
   } = values;
   const vTitle = validateTitle(title);
   const vYear = validateYear(year);
@@ -189,6 +230,7 @@ export const validateFormBook = (values) => {
   const vCount = validateCount(count);
   const vDate = validateDate(date);
   const vPublishing = validatePublishing(publishing);
+  const vAuthors = validateAuthors(authors);
 
   if (vTitle.isError) {
     errors.title = vTitle.text;
@@ -212,6 +254,10 @@ export const validateFormBook = (values) => {
 
   if (vPublishing.isError) {
     errors.publishing = vPublishing.text;
+  }
+
+  if (vAuthors.isError) {
+    errors.authors = vAuthors.error;
   }
 
   return errors;

@@ -64,6 +64,7 @@ class FormBook extends React.Component {
             type="text"
             label={BOOK_LIST_AUTHORS_CAPTION_FIELD}
             classContainer={styles.field}
+            isEdit={isEdit}
           />
           <Field
             name={BOOK_COUNT_FIELD}
