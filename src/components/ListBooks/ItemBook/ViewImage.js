@@ -3,24 +3,28 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import styles from './styles.scss';
 
-class Specification extends PureComponent {
+class ViewImage extends PureComponent {
   render() {
-    const { caption, text } = this.props;
+    const { caption, src } = this.props;
 
-    if (!text) {
+    if (!src) {
       return null;
     }
 
     return (
       <Grid container>
-        <Grid item xs={5}>
+        <Grid item xs={12}>
           <div className={styles.align}>
             {caption}
           </div>
         </Grid>
-        <Grid item xs={7}>
-          <div className={styles.align}>
-            {text}
+        <Grid item xs={12}>
+          <div>
+            <img
+              src={src}
+              alt={caption}
+              className={styles.img}
+            />
           </div>
         </Grid>
       </Grid>
@@ -28,9 +32,9 @@ class Specification extends PureComponent {
   }
 }
 
-Specification.propTypes = {
+ViewImage.propTypes = {
   caption: PropTypes.string.isRequired,
-  text: PropTypes.string,
+  src: PropTypes.string,
 };
 
-export default Specification;
+export default ViewImage;

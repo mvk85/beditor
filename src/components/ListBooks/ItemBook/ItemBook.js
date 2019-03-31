@@ -5,12 +5,13 @@ import styles from './styles.scss';
 import Specification from './Specification';
 import ChangeBook from './ChangeBook';
 import {
-  BOOK_COUNT_CAPTION_FIELD, BOOK_DATE_CAPTION_FIELD,
-  BOOK_ISBN_CAPTION_FIELD,
+  BOOK_COUNT_CAPTION_FIELD, BOOK_DATE_CAPTION_FIELD, BOOK_FILE_CAPTION_FIELD,
+  BOOK_ISBN_CAPTION_FIELD, BOOK_PUBLISHING_CAPTION_FIELD,
   BOOK_TITLE_CAPTION_FIELD,
   BOOK_YEAR_CAPTION_FIELD,
 } from '../../../consts/book';
 import { getFormatDateForBook } from '../../../utils/date';
+import ViewImage from './ViewImage';
 
 class ItemBook extends PureComponent {
   render() {
@@ -25,8 +26,10 @@ class ItemBook extends PureComponent {
       isbn,
       count,
       date,
+      file,
+      publishing,
     } = data;
-    const dateFormat = getFormatDateForBook(date);
+    const dateFormat = date && getFormatDateForBook(date);
 
     return (
       <div className={styles.card}>
@@ -45,6 +48,10 @@ class ItemBook extends PureComponent {
             text={count}
           />
           <Specification
+            caption={BOOK_PUBLISHING_CAPTION_FIELD}
+            text={publishing}
+          />
+          <Specification
             caption={BOOK_YEAR_CAPTION_FIELD}
             text={year}
           />
@@ -55,6 +62,10 @@ class ItemBook extends PureComponent {
           <Specification
             caption={BOOK_ISBN_CAPTION_FIELD}
             text={isbn}
+          />
+          <ViewImage
+            caption={BOOK_FILE_CAPTION_FIELD}
+            src={file}
           />
         </Paper>
       </div>

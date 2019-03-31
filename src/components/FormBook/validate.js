@@ -140,7 +140,7 @@ const validateCount = (value) => {
   return error;
 };
 
-const validateDate = (value) => { // value = 2019-03-22
+const validateDate = (value) => {
   const error = getErrorEmptyObj();
 
   const selectDate = moment(value, DATE_PICKER_FORMAT);
@@ -149,6 +149,19 @@ const validateDate = (value) => { // value = 2019-03-22
   if (selectDate < minDate) {
     error.isError = true;
     error.text = DATE_FIELD_TEXT_ERROR;
+
+    return error;
+  }
+
+  return error;
+};
+
+const validatePublishing = (value) => {
+  const error = getErrorEmptyObj();
+
+  if (moreThen(value, 30)) {
+    error.isError = true;
+    error.text = moreThenTextError(30);
 
     return error;
   }
@@ -168,12 +181,14 @@ export const validateFormBook = (values) => {
     isbn,
     count,
     date,
+    publishing,
   } = values;
   const vTitle = validateTitle(title);
   const vYear = validateYear(year);
   const vISBN = validateISBN(isbn);
   const vCount = validateCount(count);
   const vDate = validateDate(date);
+  const vPublishing = validatePublishing(publishing);
 
   if (vTitle.isError) {
     errors.title = vTitle.text;
@@ -193,6 +208,10 @@ export const validateFormBook = (values) => {
 
   if (vDate.isError) {
     errors.date = vDate.text;
+  }
+
+  if (vPublishing.isError) {
+    errors.publishing = vPublishing.text;
   }
 
   return errors;
